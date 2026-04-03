@@ -29,7 +29,7 @@ Original Python/tkinter → Go/Fyne → **Godot 4 GDScript**.
 
 ### 📋 PLAY Tab
 - Each **Task** has a dice roll (d6 default, upgrade via Shop)
-- **Difficulty** sets how many times you roll per task
+- **Difficulty** sets how many times you roll per task and how challenging you find a life event
 - Press **🎲** to roll individual tasks, or **ROLL ALL DICE** for everything
 - Activate **Relics** with checkboxes to apply their multiplier to your score
 - Press **💾 SAVE DAY** to commit your score to the calendar
@@ -62,20 +62,6 @@ Original Python/tkinter → Go/Fyne → **Godot 4 GDScript**.
 - Switch / create / delete **Profiles**
 - Set your **Timezone**
 - Dev tools: populate 365 days of test data, give all dice
-
----
-
-## 🃏 Joker Effects (from Shop)
-
-| Joker | Effect |
-|-------|--------|
-| **Jimbo** | +4 chips if you roll any 6 |
-| **Sloth** | 1 in 3 chance to roll twice (take higher) |
-| **Spare Change** | Earn $0.01 per 100 chips |
-| **Galaxy Brain** | ×2 mult if ALL tasks completed |
-| **Mega d6** | Every pip counts as ×2 |
-| **Lucky Die** | Minimum roll is always 3 |
-| **Crown of Thorns** | +0.5× mult, but -5 chips per missed task |
 
 ---
 
@@ -126,14 +112,6 @@ Save files are stored at:
 
 Data is stored as JSON files (no external dependencies required).
 
----
 
-## 🔧 Adding Audio
-
-Place audio files in:
-- `assets/audio/dice/` — played when rolling dice (`.wav`, `.mp3`, `.ogg`)
-- `assets/audio/relics/` — played when activating relics
-
----
 
 *Ported from Python/tkinter original. Go/Fyne reference also provided.*
