@@ -153,11 +153,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 
-[node name="TasksHeader" type="Label" parent="VBoxContainer/Columns/LeftPanel/LeftVBox" unique_id=530908277]
+[node name="TasksHeaderContainer" type="HBoxContainer" parent="VBoxContainer/Columns/LeftPanel/LeftVBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TasksHeader" type="Label" parent="VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer" unique_id=530908277]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "── DICE BOXES ──"
 horizontal_alignment = 1
+
+[node name="DiceBoxHelpBtn" type="Button" parent="VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+text = "?"
+flat = true
 
 [node name="TasksScroll" type="ScrollContainer" parent="VBoxContainer/Columns/LeftPanel/LeftVBox" unique_id=1477249669]
 layout_mode = 2
@@ -209,8 +220,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="CurioCanistersHeader" type="Label" parent="VBoxContainer/Columns/RightPanel/RightVBox" unique_id=82045034]
+[node name="CurioCanistersHeaderContainer" type="HBoxContainer" parent="VBoxContainer/Columns/RightPanel/RightVBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CurioCanistersHelpBtn" type="Button" parent="VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+text = "?"
+flat = true
+
+[node name="CurioCanistersHeader" type="Label" parent="VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer" unique_id=82045034]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "── CURIO CANISTERS ──"
 horizontal_alignment = 1

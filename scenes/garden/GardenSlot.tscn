@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bmf578f6k79n9"]
 
 [ext_resource type="Script" path="res://scripts/garden/GardenSlot.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dkn4v584w3c8q" path="res://assets/ui/icons/lock.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/space_generator/ui/Icons/locked_icon.png" id="2"]
 
 [sub_resource type="BoxMesh" id="box_mesh"]
 size = Vector3(1.8, 0.3, 1.6)

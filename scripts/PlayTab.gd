@@ -17,8 +17,8 @@ var _score_curio_bonus: Label = null
 @onready var _score_banner:      PanelContainer = $VBoxContainer/ScoreBanner
 @onready var _left_panel:        PanelContainer = $VBoxContainer/Columns/LeftPanel
 @onready var _right_panel:       PanelContainer = $VBoxContainer/Columns/RightPanel
-@onready var _tasks_header:      Label          = $VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeader
-@onready var _curio_canisters_header:     Label          = $VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeader
+@onready var _tasks_header:      Label          = get_node_or_null("VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeader") as Label
+@onready var _curio_canisters_header:     Label          = get_node_or_null("VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeader") as Label
 
 var _task_rows:    Dictionary = {}
 var _curio_canister_cards:  Dictionary = {}
@@ -128,6 +128,10 @@ func _ready() -> void:
 	set_process(true)
 	call_deferred("_refresh")
 	call_deferred("_setup_button_feedback")
+	
+	# Start help button pulse animations
+	call_deferred("_start_help_button_pulse", $VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer/DiceBoxHelpBtn as Button, "dicebox")
+	call_deferred("_start_help_button_pulse", $VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer/CurioCanistersHelpBtn as Button, "curio_canister")
 
 func _setup_button_feedback() -> void:
 	if has_node("/root/ButtonFeedback"):
@@ -651,16 +655,20 @@ func _apply_styles() -> void:
 	_style_panel(_score_banner, GameData.TABLE_FELT, Color("#0d1a35"))
 	_style_panel(_left_panel,   Color("#060220"),    Color("#290E7A"))
 	_style_panel(_right_panel,  Color("#070120"),    Color("#6F1CB2"))
-	_nav_label.add_theme_color_override("font_color",    GameData.ACCENT_GOLD)
-	_score_chips.add_theme_color_override("font_color",  GameData.ACCENT_BLUE)
-	_score_mult.add_theme_color_override("font_color",    GameData.ACCENT_RED)
-	_score_total.add_theme_color_override("font_color",  GameData.ACCENT_GOLD)
-	_tasks_header.add_theme_color_override("font_color", GameData.ACCENT_BLUE)
-	_curio_canisters_header.add_theme_color_override("font_color",GameData.ACCENT_CURIO_CANISTER)
-	
-	# Add drop shadows to panel headers
-	_add_label_drop_shadow(_tasks_header)
-	_add_label_drop_shadow(_curio_canisters_header)
+	if is_instance_valid(_nav_label):
+		_nav_label.add_theme_color_override("font_color", GameData.ACCENT_GOLD)
+	if is_instance_valid(_score_chips):
+		_score_chips.add_theme_color_override("font_color", GameData.ACCENT_BLUE)
+	if is_instance_valid(_score_mult):
+		_score_mult.add_theme_color_override("font_color", GameData.ACCENT_RED)
+	if is_instance_valid(_score_total):
+		_score_total.add_theme_color_override("font_color", GameData.ACCENT_GOLD)
+	if is_instance_valid(_tasks_header):
+		_tasks_header.add_theme_color_override("font_color", GameData.ACCENT_BLUE)
+		_add_label_drop_shadow(_tasks_header)
+	if is_instance_valid(_curio_canisters_header):
+		_curio_canisters_header.add_theme_color_override("font_color", GameData.ACCENT_CURIO_CANISTER)
+		_add_label_drop_shadow(_curio_canisters_header)
 
 func _add_label_drop_shadow(label: Label) -> void:
 	if not is_instance_valid(label):
@@ -680,6 +688,14 @@ func _connect_buttons() -> void:
 	_dice_table.connect("layout_changed", _auto_save_dice_layout)
 	call_deferred("_build_play_debug_panel")
 	call_deferred("_setup_debug_wrench")
+	
+	# Connect tutorial help buttons
+	($VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer/DiceBoxHelpBtn as Button).pressed.connect(_show_dice_box_tutorial)
+	($VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer/CurioCanistersHelpBtn as Button).pressed.connect(_show_curio_canister_tutorial)
+	
+	# Style help buttons
+	_style_help_button($VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer/DiceBoxHelpBtn as Button)
+	_style_help_button($VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer/CurioCanistersHelpBtn as Button)
 
 var _refreshing: bool = false
 func _refresh() -> void:
@@ -1289,7 +1305,7 @@ func _set_curio_canister_active_silent(rid: int, active: bool) -> void:
 		state_lbl.add_theme_color_override("font_color", curio_canister_col if active else READABLE_TEXT)
 	if is_instance_valid(title_lbl):
 		title_lbl.add_theme_color_override("font_color", curio_canister_col if active else READABLE_TEXT)
-	       # equip_btn removed
+		   # equip_btn removed
 	if is_instance_valid(emoji_lbl):
 		emoji_lbl.add_theme_color_override("font_color", curio_canister_col if active else READABLE_TEXT)
 	if active:
@@ -2415,3 +2431,134 @@ func _remove_debug_wrench() -> void:
 
 func _exit_tree() -> void:
 	pass
+
+# ─────────────────────────────────────────────────────────────────
+#  Tutorial Help System
+# ─────────────────────────────────────────────────────────────────
+var _help_button_pulse_tween: Tween = null
+var _help_button_first_click: Dictionary = {
+	"dicebox": false,
+	"curio_canister": false
+}
+
+func _style_help_button(btn: Button) -> void:
+	if not is_instance_valid(btn):
+		return
+	
+	# Style with moonseed green background and white ?
+	var s := StyleBoxFlat.new()
+	s.bg_color = Color("#A1EBAC")  # Moonseed green (ACCENT_TEXT_SECONDARY)
+	s.border_color = Color("#ffffff") # White border
+	s.set_border_width_all(2)  # Thicker border for visibility
+	s.set_corner_radius_all(6)  # Slightly larger radius
+	btn.add_theme_stylebox_override("normal", s)
+	btn.add_theme_stylebox_override("hover", s)
+	btn.add_theme_stylebox_override("pressed", s)
+	btn.add_theme_stylebox_override("disabled", s)
+	
+	# White text for ? - larger size
+	btn.add_theme_color_override("font_color", Color("#ffffff"))
+	btn.add_theme_font_size_override("font_size", GameData.scaled_font_size(16))  # Larger text
+	btn.flat = true
+	btn.custom_minimum_size = Vector2(24, 24)  # Larger button
+	
+	# Add drop shadow for visibility
+	btn.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	btn.add_theme_constant_override("shadow_offset_x", 1)
+	btn.add_theme_constant_override("shadow_offset_y", 1)
+
+func _start_help_button_pulse(btn: Button, button_id: String) -> void:
+	if not is_instance_valid(btn):
+		return
+	
+	# Don't pulse if already clicked or debug mode is always visible
+	if _help_button_first_click[button_id] and not GameData.is_debug_mode():
+		return
+	
+	# Pulse animation - scales in and out continuously
+	var pulse_tween: Tween = btn.create_tween()
+	pulse_tween.set_loops()
+	pulse_tween.tween_property(btn, "scale", Vector2(1.15, 1.15), 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	pulse_tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_help_button_pulse_tween = pulse_tween
+
+func _show_tutorial_message(message: String, target_button: Button) -> void:
+	# Create a simple modal popup with close button
+	var popup := PanelContainer.new()
+	popup.name = "TutorialPopup"
+	popup.z_index = 1000
+	popup.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	# Style the popup
+	var popup_style := StyleBoxFlat.new()
+	popup_style.bg_color = Color("#0d0520") # Dark background
+	popup_style.border_color = Color("#A1EBAC") # Moonseed green border
+	popup_style.set_border_width_all(2)
+	popup_style.set_corner_radius_all(8)
+	popup.add_theme_stylebox_override("panel", popup_style)
+	popup.custom_minimum_size = Vector2(280, 0)
+	
+	# Create content layout
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 8)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 12)
+	margin.add_theme_constant_override("margin_right", 12)
+	margin.add_theme_constant_override("margin_top", 12)
+	margin.add_theme_constant_override("margin_bottom", 12)
+	popup.add_child(margin)
+	margin.add_child(vbox)
+	
+	# Add message text
+	var msg_label := Label.new()
+	msg_label.text = message
+	msg_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	msg_label.add_theme_color_override("font_color", GameData.FG_COLOR)
+	msg_label.add_theme_font_size_override("font_size", GameData.scaled_font_size(12))
+	vbox.add_child(msg_label)
+	
+	# Add close button
+	var close_btn := Button.new()
+	close_btn.text = "Got it!"
+	close_btn.add_theme_color_override("font_color", GameData.ACCENT_GOLD)
+	close_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	close_btn.pressed.connect(func():
+		if is_instance_valid(popup):
+			popup.queue_free()
+	)
+	vbox.add_child(close_btn)
+	
+	# Position popup near the button
+	if is_instance_valid(target_button):
+		var btn_rect := target_button.get_global_rect()
+		var viewport_size := get_viewport_rect().size
+		popup.visible = false
+		add_child(popup)
+		# Wait one frame so the popup can enter the scene and compute its size
+		await get_tree().process_frame
+		# Position above the button, centered horizontally
+		var popup_width := popup.size.x
+		var popup_height := popup.size.y
+		var x := btn_rect.position.x - (popup_width - btn_rect.size.x) / 2
+		var y := btn_rect.position.y - popup_height - 12
+		# Keep popup inside viewport
+		x = clampf(x, 10, viewport_size.x - popup_width - 10)
+		y = clampf(y, 10, viewport_size.y - popup_height - 10)
+		popup.position = Vector2(x, y)
+		popup.visible = true
+	else:
+		# Fallback to center of screen
+		add_child(popup)
+		popup.popup_centered()
+
+func _show_dice_box_tutorial() -> void:
+	_show_tutorial_message(
+		"This is the place for daily tasks, eg Drink Water, Eat Food, Exercise etc\n\nNew dice boxes can be added in the Request Nook in the Bazaar screen. The Tunnel Mouse can craft you new containers to store your tasks.",
+		$VBoxContainer/Columns/LeftPanel/LeftVBox/TasksHeaderContainer/DiceBoxHelpBtn as Button
+	)
+
+func _show_curio_canister_tutorial() -> void:
+	_show_tutorial_message(
+		"This is the place for tasks you have to complete occasionally, eg Laundry, Grocery Shopping, etc\n\nNew curio canisters can be added in the Request Nook in the Bazaar screen. The Tunnel Mouse can craft you new containers to store your tasks.",
+		$VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersHeaderContainer/CurioCanistersHelpBtn as Button
+	)
