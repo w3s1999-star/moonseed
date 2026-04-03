@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/dice_base.gd" id="1_dicebase"]
+[ext_resource type="Shader" path="res://shaders/dice_explosion_shader.gdshader" id="2_explosion_shader"]
+[ext_resource type="Texture2D" uid="uid://bvqy4hd1yqgxl" path="res://assets/textures/Card Base/Card_Base_White.png" id="3_white_texture"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(40, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("2_explosion_shader")
+shader_parameters/initial_linear_velocity_min = 150.0
+shader_parameters/initial_linear_velocity_max = 300.0
+shader_parameters/scale_min = 0.5
+shader_parameters/scale_max = 1.5
+shader_parameters/lifetime_randomness = 0.3
+shader_parameters/emission_box_extents = Vector3(20, 20, 0)
+shader_parameters/explosion_color = Color(1.0, 0.8, 0.4, 1.0)
+
+[node name="DiceBase" type="RigidBody2D"]
+script = ExtResource("1_dicebase")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.3)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+amount = 64
+process_material = SubResource("ShaderMaterial_1")
+texture = ExtResource("3_white_texture")
+explosiveness = 1.0
+lifetime = 1.5
+one_shot = true
+emitting = false
+
+[node name="FaceHighlight" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="FaceSprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="FaceLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+alignment = 1
+vertical_alignment = 1
+text = "?"
+theme_override_font_sizes/font_size = 18

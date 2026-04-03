@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://dn8mlsj4yyk5l"]
+
+[ext_resource type="Script" uid="uid://cnqcd5s7j2yb3" path="res://scripts/ui/satchel_transition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/satchel/satchel_base_brown.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/satchel/satchel_flap_brown.png" id="3"]
+
+[node name="SatchelTransition" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+visible = false
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Satchel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BagShadow" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = -226.0
+offset_top = 146.0
+offset_right = 226.0
+offset_bottom = 188.0
+modulate = Color(0, 0, 0, 0.28)
+
+[node name="BagBase" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = -220.0
+offset_top = -125.0
+offset_right = 220.0
+offset_bottom = 175.0
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BagLeftFold" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = -232.0
+offset_top = -118.0
+offset_right = -168.0
+offset_bottom = 170.0
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.86, 0.86, 0.86, 1)
+
+[node name="BagRightFold" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = 168.0
+offset_top = -118.0
+offset_right = 232.0
+offset_bottom = 170.0
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.86, 0.86, 0.86, 1)
+
+[node name="BagFlapPivot" type="Node2D" parent="Satchel"]
+position = Vector2(0, -112)
+rotation = 0.0
+
+[node name="BagFlap" type="TextureRect" parent="Satchel/BagFlapPivot"]
+z_index = 10
+offset_left = -220.0
+offset_top = -12.0
+offset_right = 220.0
+offset_bottom = 150.0
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BagClasp" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = -26.0
+offset_right = 22.0
+offset_bottom = 16.0
+modulate = Color(0.79, 0.67, 0.36, 1)
+
+[node name="InnerCloth" type="TextureRect" parent="Satchel"]
+layout_mode = 2
+offset_left = -175.0
+offset_top = -20.0
+offset_right = 175.0
+offset_bottom = 154.0
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DustParticles" type="CPUParticles2D" parent="Satchel"]
+position = Vector2(0, 0)
+emitting = false
+amount = 24
+lifetime = 0.8
+one_shot = true
+local_coords = false
+direction = Vector2(0, -1)
+spread_degrees = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+gravity = Vector2(0, 20)
+scale_amount_min = 0.5
+scale_amount_max = 1.2
+color = Color(1, 0.8, 0.4, 0.6)
+
+[node name="SatchelContent" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentRoot" type="Control" parent="SatchelContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+modulate = Color(1, 1, 1, 0)
+offset_top = 20.0
+
+[node name="AudioRoot" type="Node" parent="."]
+
+[node name="PressPlayer" type="AudioStreamPlayer" parent="AudioRoot"]
+bus = &"Master"
+
+[node name="ClaspPlayer" type="AudioStreamPlayer" parent="AudioRoot"]
+bus = &"Master"
+
+[node name="OpenPlayer" type="AudioStreamPlayer" parent="AudioRoot"]
+bus = &"Master"
+
+[node name="RevealPlayer" type="AudioStreamPlayer" parent="AudioRoot"]
+bus = &"Master"

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dnxajpmnew052"]
+
+[ext_resource type="Script" uid="uid://bnsowaymexl7j" path="res://scripts/tools/btn_phase2_generator.gd" id="1_u3fur"]
+[ext_resource type="Script" uid="uid://dp5d3sgbux8h3" path="res://scripts/tools/BtnPhase2Validator.gd" id="2_3njgq"]
+
+[node name="Node" type="Node" unique_id=190776272]
+script = ExtResource("1_u3fur")
+
+[node name="Control" type="Control" parent="." unique_id=997403624]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_3njgq")

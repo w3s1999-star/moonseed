@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bazaar_selenic_exchange_screen"]
+
+[ext_resource type="PackedScene" path="res://scenes/bazaar/ShopScreenBase.tscn" id="1_shop_screen_base"]
+[ext_resource type="Script" path="res://scripts/bazaar/shops/selenic_exchange_screen.gd" id="2_selenic_exchange"]
+[ext_resource type="PackedScene" path="res://scenes/ui/StandardizedShopLayout.tscn" id="3_standardized_layout"]
+
+[node name="SelenicExchangeScreen" instance=ExtResource("1_shop_screen_base")]
+script = ExtResource("2_selenic_exchange")
+shop_title = "Selenic Exchange"
+merchant_name = "Moon Deer"
+dialogue_text = "The exchange is ready to receive your offering."
+
+[node name="StandardizedShopLayout" parent="." instance=ExtResource("3_standardized_layout")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+

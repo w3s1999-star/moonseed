@@ -1,0 +1,291 @@
+[gd_scene load_steps=9 format=3 uid="uid://bazaar_shop_screen_base"]
+
+[ext_resource type="Script" path="res://scripts/bazaar/shops/shop_screen_base.gd" id="1_shop_screen_base"]
+[ext_resource type="PackedScene" path="res://scenes/bazaar/ShopActionButton.tscn" id="2_shop_action_button"]
+[ext_resource type="Texture2D" path="res://assets/textures/bg_purple.png" id="3_room_bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/table/dice_side_panel_right.png" id="4_board_frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/placeholders/icon_curio.png" id="5_shop_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/placeholders/icon_stardust.png" id="6_moonpearl_icon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue_bubble"]
+bg_color = Color(1, 1, 1, 0.95)
+border_color = Color(0.25, 0.15, 0.35, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 10
+content_margin_right = 10
+content_margin_top = 8
+content_margin_bottom = 8
+
+
+[node name="ShopScreenBase" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop_screen_base")
+
+[node name="BackgroundRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeftMerchantScene" type="Control" parent="BackgroundRoot"]
+layout_mode = 1
+anchor_right = 0.6666667
+anchor_bottom = 1.0
+
+[node name="RoomBackground" type="TextureRect" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("3_room_bg")
+stretch_mode = 6
+
+[node name="AmbientPropsBack" type="Control" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MerchantSprite" type="TextureRect" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 360.0
+offset_bottom = 350.0
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="AmbientPropsFront" type="Control" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="DialoguePopupAnchor" type="Control" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+offset_left = 220.0
+offset_top = 60.0
+offset_right = 240.0
+offset_bottom = 80.0
+mouse_filter = 2
+
+[node name="MerchantInteractionHotspot" type="Control" parent="BackgroundRoot/LeftMerchantScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="RightMenuBoard" type="TextureRect" parent="BackgroundRoot"]
+layout_mode = 1
+anchor_left = 0.6666667
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("4_board_frame")
+stretch_mode = 0
+
+[node name="ShopHeader" type="Control" parent="BackgroundRoot/RightMenuBoard"]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 120.0
+mouse_filter = 2
+
+[node name="ShopIcon" type="TextureRect" parent="BackgroundRoot/RightMenuBoard/ShopHeader"]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("5_shop_icon")
+stretch_mode = 5
+
+[node name="ShopTitleLabel" type="Label" parent="BackgroundRoot/RightMenuBoard/ShopHeader"]
+layout_mode = 1
+offset_left = 40.0
+offset_right = 0.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "Shop"
+vertical_alignment = 1
+
+[node name="ShopSubtitleLabel" type="Label" parent="BackgroundRoot/RightMenuBoard/ShopHeader"]
+visible = false
+layout_mode = 1
+offset_top = 40.0
+offset_right = 0.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 12
+text = ""
+vertical_alignment = 1
+
+[node name="CurrencyRow" type="HBoxContainer" parent="BackgroundRoot/RightMenuBoard/ShopHeader"]
+layout_mode = 1
+offset_top = 76.0
+offset_right = 0.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="MoonpearlIcon" type="TextureRect" parent="BackgroundRoot/RightMenuBoard/ShopHeader/CurrencyRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_moonpearl_icon")
+stretch_mode = 5
+
+[node name="MoonpearlLabel" type="Label" parent="BackgroundRoot/RightMenuBoard/ShopHeader/CurrencyRow"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+vertical_alignment = 1
+
+[node name="ButtonList" type="VBoxContainer" parent="BackgroundRoot/RightMenuBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 132.0
+offset_right = -16.0
+offset_bottom = -16.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="ActionButton01" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Action 1"
+
+[node name="ActionButton02" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Action 2"
+
+[node name="ActionButton03" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Action 3"
+
+[node name="ActionButton04" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Action 4"
+
+[node name="ActionButton05" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Action 5"
+
+[node name="LeaveButton" parent="BackgroundRoot/RightMenuBoard/ButtonList" instance=ExtResource("2_shop_action_button")]
+layout_mode = 2
+label_text = "Leave"
+
+[node name="DialoguePopup" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.25
+anchor_top = 0.75
+anchor_right = 0.75
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue_bubble")
+
+[node name="PopupVBox" type="VBoxContainer" parent="DialoguePopup"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="OptionalNameTag" type="Label" parent="DialoguePopup/PopupVBox"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = ""
+
+[node name="DialogueLabel" type="Label" parent="DialoguePopup/PopupVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = ""
+autowrap_mode = 3
+
+[node name="PopupLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="BrowsePopup" type="PanelContainer" parent="PopupLayer"]
+visible = false
+layout_mode = 1
+anchor_left = 0.6666667
+anchor_top = 0.5
+anchor_right = 0.6666667
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -160.0
+offset_right = 300.0
+offset_bottom = 160.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ConfirmPopup" type="PanelContainer" parent="PopupLayer"]
+visible = false
+layout_mode = 1
+anchor_left = 0.6666667
+anchor_top = 0.5
+anchor_right = 0.6666667
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 260.0
+offset_bottom = 120.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="DetailPopup" type="PanelContainer" parent="PopupLayer"]
+visible = false
+layout_mode = 1
+anchor_left = 0.6666667
+anchor_top = 0.5
+anchor_right = 0.6666667
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -160.0
+offset_right = 300.0
+offset_bottom = 160.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="EditorPopup" type="PanelContainer" parent="PopupLayer"]
+visible = false
+layout_mode = 1
+anchor_left = 0.6666667
+anchor_top = 0.5
+anchor_right = 0.6666667
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+mouse_filter = 2
+

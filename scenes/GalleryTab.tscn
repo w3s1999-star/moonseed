@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bu8byxomx5o02"]
+
+[ext_resource type="Script" uid="uid://kebahduc0q5d" path="res://scripts/GalleryTab.gd" id="1"]
+
+[node name="GalleryTab" type="Control" unique_id=1089852075]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")

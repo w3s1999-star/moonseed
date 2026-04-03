@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bazaar_request_nook_screen"]
+
+[ext_resource type="PackedScene" path="res://scenes/bazaar/ShopScreenBase.tscn" id="1_shop_screen_base"]
+[ext_resource type="Script" path="res://scripts/bazaar/shops/request_nook_screen.gd" id="2_request_nook"]
+
+[node name="RequestNookScreen" instance=ExtResource("1_shop_screen_base")]
+script = ExtResource("2_request_nook")
+shop_title = "Request Nook"
+merchant_name = "Tunnel Post Mouse"
+dialogue_text = "Fresh requests arrived through the tunnel post."
+

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bazaar_curio_dealer_screen"]
+
+[ext_resource type="PackedScene" path="res://scenes/bazaar/ShopScreenBase.tscn" id="1_shop_screen_base"]
+[ext_resource type="Script" path="res://scripts/bazaar/shops/curio_dealer_screen.gd" id="2_curio_dealer"]
+
+[node name="CurioDealerScreen" instance=ExtResource("1_shop_screen_base")]
+script = ExtResource("2_curio_dealer")
+shop_title = "Curio Dealer"
+shop_subtitle = "Rare Collectables"
+merchant_name = "Star-Nosed Mole"
+dialogue_text = "Found some odd little things today."

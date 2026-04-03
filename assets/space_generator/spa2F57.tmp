@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://cty7f06ayes3d"]
+
+[ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
+[ext_resource type="PackedScene" uid="uid://b18xsn8oiptpo" path="res://GeneratorLayers/NebulaLayer/nebula_layer.tscn" id="2_ao41h"]
+[ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://GeneratorLayers/StarLayer/star_layer.tscn" id="2_d6qfi"]
+[ext_resource type="PackedScene" uid="uid://d0omivo80nscj" path="res://UI/ui_manager.tscn" id="5_q4bfc"]
+[ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://GeneratorLayers/NebulaLayer/Palettes/default_bg_palette.png" id="7_eqrwb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_proil"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ofv6x"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qmkdn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "star_generator", "nebula_layers")]
+script = ExtResource("1_8dqb6")
+layers = [NodePath("LowerNebula"), NodePath("StarGenerator"), NodePath("UpperNebula")]
+star_generator = NodePath("StarGenerator")
+nebula_layers = [NodePath("LowerNebula"), NodePath("UpperNebula")]
+
+[node name="LowerNebula" parent="." instance=ExtResource("2_ao41h")]
+offset_right = 1440.0
+offset_bottom = 1200.0
+scale = Vector2(2, 2)
+texture = SubResource("ViewportTexture_proil")
+palette = ExtResource("7_eqrwb")
+contrast = 14.52
+threshold = 48.31
+alpha = 0.86
+speed = 8.0
+
+[node name="StarGenerator" parent="." instance=ExtResource("2_d6qfi")]
+offset_right = 1440.0
+offset_bottom = 1440.0
+scale = Vector2(2, 2)
+texture = SubResource("ViewportTexture_ofv6x")
+speed = 6.0
+
+[node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
+offset_right = 1440.0
+offset_bottom = 1200.0
+scale = Vector2(2, 2)
+texture = SubResource("ViewportTexture_qmkdn")
+contrast = 20.705
+threshold = 3.94
+alpha = 0.43
+speed = 24.0
+
+[node name="UIManager" parent="." node_paths=PackedStringArray("left_panel", "delete_layer_dialogue", "delete_layer_dialogue_label") instance=ExtResource("5_q4bfc")]
+left_panel = NodePath("")
+delete_layer_dialogue = NodePath("")
+delete_layer_dialogue_label = NodePath("")
+
+[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../LowerNebula")
+
+[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../StarGenerator")
+
+[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../UpperNebula")
+
+[editable path="UIManager"]
+[editable path="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
+[editable path="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
+[editable path="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove"]

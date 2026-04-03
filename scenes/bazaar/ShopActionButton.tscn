@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bazaar_shop_action_button"]
+
+[ext_resource type="Script" path="res://scripts/bazaar/shops/shop_action_button.gd" id="1_shop_action_btn"]
+
+[node name="ShopActionButton" type="Button"]
+custom_minimum_size = Vector2(0, 44)
+size_flags_horizontal = 3
+text = ""
+flat = false
+script = ExtResource("1_shop_action_btn")

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dicebackground"]
+
+[ext_resource type="Script" path="res://scripts/dice/DiceBackground.gd" id=1]
+
+[node name="DiceBackground" type="Node2D" unique_id=1]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2]
+z_index = -1
+

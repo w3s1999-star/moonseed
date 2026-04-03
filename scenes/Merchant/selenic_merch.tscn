@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bpbjcj5v2f4qi"]
+
+[ext_resource type="Texture2D" uid="uid://bi65awn5fh6un" path="res://assets/textures/Selenic Merchant/wings.png" id="1_vghqx"]
+[ext_resource type="Texture2D" uid="uid://cpcqexbshaung" path="res://assets/textures/Selenic Merchant/antler right.png" id="2_j15nm"]
+[ext_resource type="Texture2D" uid="uid://l570mml21c8v" path="res://assets/textures/Selenic Merchant/arm right.png" id="3_7sa8f"]
+[ext_resource type="Texture2D" uid="uid://vf5ubqkufkpf" path="res://assets/textures/Selenic Merchant/body.png" id="4_wjl16"]
+[ext_resource type="Texture2D" uid="uid://dnurweyvjgka8" path="res://assets/textures/Selenic Merchant/necklace.png" id="5_ebd6f"]
+[ext_resource type="Texture2D" uid="uid://b7om5b0cyc4b5" path="res://assets/textures/Selenic Merchant/head.png" id="6_y0nx1"]
+[ext_resource type="Texture2D" uid="uid://dpj21wfpymc7o" path="res://assets/textures/Selenic Merchant/orb.png" id="7_pj3y4"]
+[ext_resource type="Texture2D" uid="uid://cmefb64nt4rgq" path="res://assets/textures/Selenic Merchant/sash.png" id="8_803b4"]
+[ext_resource type="Texture2D" uid="uid://dj0wn2rpxbo71" path="res://assets/textures/Selenic Merchant/antler left.png" id="9_06por"]
+[ext_resource type="Texture2D" uid="uid://dfaxm40rk6jgt" path="res://assets/textures/Selenic Merchant/arm left.png" id="10_71upc"]
+
+[node name="Selenic Merch" type="Node2D" unique_id=950116746]
+position = Vector2(-347, -21)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=688910075]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2128084186]
+
+[node name="Wings" type="Sprite2D" parent="." unique_id=1924349166]
+position = Vector2(338.5, 11)
+scale = Vector2(1.0426357, 0.8871951)
+texture = ExtResource("1_vghqx")
+
+[node name="AntlerRight" type="Sprite2D" parent="." unique_id=775675733]
+position = Vector2(395.5, -139)
+texture = ExtResource("2_j15nm")
+
+[node name="ArmRight" type="Sprite2D" parent="." unique_id=1592407746]
+position = Vector2(451.5, 130)
+texture = ExtResource("3_7sa8f")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=671361141]
+position = Vector2(338.5, 194)
+texture = ExtResource("4_wjl16")
+
+[node name="Necklace" type="Sprite2D" parent="." unique_id=1709430902]
+position = Vector2(337.25, 43)
+scale = Vector2(0.7929293, 0.79545456)
+texture = ExtResource("5_ebd6f")
+
+[node name="Head" type="Sprite2D" parent="." unique_id=419124721]
+position = Vector2(338.5, -44)
+texture = ExtResource("6_y0nx1")
+
+[node name="Orb" type="Sprite2D" parent="." unique_id=1727308470]
+position = Vector2(195.5, 57)
+texture = ExtResource("7_pj3y4")
+
+[node name="Sash" type="Sprite2D" parent="." unique_id=785799746]
+position = Vector2(348.75, 102)
+scale = Vector2(0.92748094, 1)
+texture = ExtResource("8_803b4")
+
+[node name="AntlerLeft" type="Sprite2D" parent="." unique_id=311269860]
+position = Vector2(280.5, -143)
+texture = ExtResource("9_06por")
+
+[node name="ArmLeft" type="Sprite2D" parent="." unique_id=503439568]
+position = Vector2(241, 74)
+scale = Vector2(0.9440559, 0.9710744)
+texture = ExtResource("10_71upc")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=621020912]

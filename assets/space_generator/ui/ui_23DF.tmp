@@ -1,0 +1,720 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0omivo80nscj"]
+
+[ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
+[ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
+[ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
+[ext_resource type="Script" path="res://UI/duplicate_layer.gd" id="4_0kcov"]
+[ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
+[ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
+[ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
+[ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
+[ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
+[ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
+[ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
+
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "duplicate_layer_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hx1bx")
+script = ExtResource("2_4wugv")
+left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
+right_panel = NodePath("MainUIHBox/RightPanel")
+layer_controls_vbox = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer")
+add_layer_dialogue = NodePath("AddLayerDialogue")
+delete_layer_dialogue = NodePath("DeleteLayerDialogue")
+delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
+duplicate_layer_button = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/DuplicateLayer")
+
+[node name="MainUIHBox" type="HBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hx1bx")
+
+[node name="LeftPanel" type="MarginContainer" parent="MainUIHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUIHBox/LeftPanel"]
+layout_mode = 2
+
+[node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LayersVBox" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="PanelContainer" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jfaio")
+
+[node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/PanelContainer"]
+layout_mode = 2
+text = "LAYERS"
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LayersScrollContainer" type="ScrollContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NebulaLayerBelow" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+matched_layer_type = 1
+
+[node name="StarLayer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+
+[node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+matched_layer_type = 1
+
+[node name="HSeparator3" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="AddLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "Add Layer"
+
+[node name="DuplicateLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Duplicate Layer"
+script = ExtResource("4_0kcov")
+
+[node name="Control" type="Control" parent="MainUIHBox/LeftPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="MainUIHBox/LeftPanel"]
+custom_minimum_size = Vector2(30, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("2_icj5e")
+texture_pressed = ExtResource("4_o5whv")
+stretch_mode = 5
+
+[node name="RightPanel" type="MarginContainer" parent="MainUIHBox" node_paths=PackedStringArray("panels", "palette_editor")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_7edgt")
+panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel"), NodePath("PlanetLayerControlPanel")]
+palette_editor = NodePath("PaletteDialogue")
+
+[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
+visible = false
+layout_mode = 2
+script = ExtResource("7_vdxbv")
+star_quantity_slider = NodePath("ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider")
+star_ratio_sliders = [NodePath("ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider")]
+scroll_speed_slider = NodePath("ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider")
+name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel"]
+layout_mode = 2
+
+[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="NameTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 20
+
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "STAR PARAMETERS"
+
+[node name="StarQuantity" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="StarQuantityTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Star Quantity: "
+
+[node name="StarQuantitySlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 256.0
+
+[node name="HSeparator3" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="StarRatioTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "Star Ratio
+"
+
+[node name="SmallStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="SmallStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Small Stars:"
+
+[node name="SmallStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="MediumStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="MediumStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Medium Stars:"
+
+[node name="MediumStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="LargeStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="LargeStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Large Stars:"
+
+[node name="LargeStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="LayerParametersSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="LayerParametersTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "LAYER PARAMETERS"
+
+[node name="ScrollSpeedHBox" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="ScrollSpeedLabel" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scroll Speed: "
+
+[node name="ScrollSpeedHSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+step = 0.1
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="NewSeed" type="Button" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "New Seed"
+
+[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "alpha_slider", "dither_checkbox", "modulation_checkbox", "modulation_color_picker_button", "modulation_intensity_slider", "modulation_steps_spin_box", "oscillation_checkbox", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
+visible = false
+layout_mode = 2
+script = ExtResource("8_43iu2")
+threshold_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Threshold/ThresholdHSlider")
+alpha_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Alpha/AlphaHSlider")
+dither_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/EnableDither")
+modulation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled")
+modulation_color_picker_button = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor/ColorPickerButton")
+modulation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity/ModulationIntensitySlider")
+modulation_steps_spin_box = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps/SpinBox")
+oscillation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Oscillation/CheckBox")
+oscillation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider")
+oscillation_rate_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider")
+oscillation_offset_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider")
+speed_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Speed/SpeedHSlider")
+name_edit = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/HBoxContainer/LineEdit")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="NameTitle" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 20
+
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="NebulaSettingsTitle" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+text = "NEBULA SETTINGS"
+
+[node name="Threshold" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="ThresholdLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Threshold:"
+
+[node name="ThresholdHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="Alpha" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="AlphaLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Alpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Alpha:"
+
+[node name="AlphaHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Alpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="EnableDither" type="CheckBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Dither Enabled"
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Oscillation" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Oscillation"]
+layout_mode = 2
+text = "Oscillation Enabled"
+icon_alignment = 2
+
+[node name="OscillationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationIntensityLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Intensity:"
+
+[node name="OscillationIntensityHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 2.0
+step = 0.01
+
+[node name="OscillationRate" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationRateLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Rate:"
+
+[node name="OscillationRateHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 16.0
+step = 0.01
+
+[node name="OscillationOffset" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationOffsetLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Offset:"
+
+[node name="OscillationOffsetHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 0.5
+step = 0.005
+
+[node name="HSeparator3" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="ModulationEnabled" type="CheckBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Modulation Enabled"
+
+[node name="ModulationColor" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mod. Color:"
+vertical_alignment = 2
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="ModulationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mod. Intensity:"
+
+[node name="ModulationIntensitySlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="ModulationSteps" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mod. Steps"
+
+[node name="SpinBox" type="SpinBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 16.0
+value = 2.0
+alignment = 2
+
+[node name="HSeparator4" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+text = "LAYER SETTINGS"
+
+[node name="Speed" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scroll Speed:"
+
+[node name="SpeedHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="HSeparator5" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="EditPalette" type="Button" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "Edit Palette"
+
+[node name="NewSeed" type="Button" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "New Seed"
+alignment = 0
+
+[node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel"]
+visible = false
+layout_mode = 2
+script = ExtResource("10_cejk5")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PlanetTitle" type="HBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/PlanetTitle"]
+layout_mode = 2
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/PlanetTitle"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Note" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+text = "Note: planet layers cannot be exported. Sprites are available via the download button for you to create your own in your engine of choice."
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PaletteDialogue" parent="MainUIHBox/RightPanel" instance=ExtResource("9_8nwe8")]
+visible = false
+layout_mode = 2
+
+[node name="AddLayerDialogue" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="PanelContainer" type="PanelContainer" parent="AddLayerDialogue"]
+layout_mode = 2
+offset_top = 216.0
+offset_right = 720.0
+offset_bottom = 264.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLayerDialogue/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="AddLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Add Layer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="AddLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StarLayer" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Star Layer"
+
+[node name="VSeparator" type="VSeparator" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NebulaLayer" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Nebula Layer"
+
+[node name="VSeparator2" type="VSeparator" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlanetLayer" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Planet Layer"
+
+[node name="Cancel" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+text = "Cancel"
+
+[node name="DeleteLayerDialogue" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="PanelContainer" type="PanelContainer" parent="DeleteLayerDialogue"]
+layout_mode = 2
+offset_top = 216.0
+offset_right = 720.0
+offset_bottom = 264.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeleteLayerDialogue/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Delete Layer: __?"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OK" type="Button" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "OK"
+
+[node name="VSeparator" type="VSeparator" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Cancel"
+
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="request_layer_reorder"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="close_layer_panel"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="toggle_layer"]
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="request_layer_reorder"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="close_layer_panel"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="toggle_layer"]
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="request_layer_reorder"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="close_layer_panel"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="toggle_layer"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/AddLayer" to="." method="query_create_layer"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
+[connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
+[connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_quantity"]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [0]]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [1]]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_layer_speed"]
+[connection signal="pressed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="open_palette_editor_requested" from="MainUIHBox/RightPanel/NebulaLayerControlPanel" to="MainUIHBox/RightPanel" method="open_palette_editor"]
+[connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Threshold/ThresholdHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_threshold"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Alpha/AlphaHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_alpha"]
+[connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EnableDither" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_dither_enabled"]
+[connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Oscillation/CheckBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_rate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_offset"]
+[connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_enabled"]
+[connection signal="color_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor/ColorPickerButton" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_color"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity/ModulationIntensitySlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps/SpinBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_steps"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
+[connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
+[connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]
+[connection signal="text_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/PlanetTitle/LineEdit" to="." method="update_layer_name"]
+[connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
+[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/StarLayer" to="." method="create_layer" binds= [0]]
+[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/NebulaLayer" to="." method="create_layer" binds= [1]]
+[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/PlanetLayer" to="." method="create_layer" binds= [2]]
+[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/Cancel" to="." method="cancel_create_layer"]
+[connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
+[connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
+
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer"]
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove"]

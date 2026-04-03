@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://coinecave001"]
+
+[ext_resource type="Script" path="res://scripts/LunarBazaarTab.gd" id="1_lunarbazaar"]
+
+[node name="LunarBazaarTab" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lunarbazaar")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootVBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+offset_top = 0.0
+offset_left = 0.0
+
+[node name="HeaderLabel" type="Label" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+text = "🌙 LUNAR BAZAAR"
+theme_override_font_sizes/font_size = 22
+alignment = 1
+
+[node name="WalletRow" type="HBoxContainer" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CoinHBox" type="HBoxContainer" parent="ScrollContainer/RootVBox/WalletRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CoinLabel" type="Label" parent="ScrollContainer/RootVBox/WalletRow/CoinHBox"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 15
+
+[node name="MoonpearlsHBox" type="HBoxContainer" parent="ScrollContainer/RootVBox/WalletRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="MoonpearlsLabel" type="Label" parent="ScrollContainer/RootVBox/WalletRow/MoonpearlsHBox"]
+layout_mode = 2
+text = "✨ Moonpearls: 0"
+theme_override_font_sizes/font_size = 15
+
+[node name="Separator1" type="HSeparator" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+
+[node name="PressSection" type="PanelContainer" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+
+[node name="PressSectionVBox" type="VBoxContainer" parent="ScrollContainer/RootVBox/PressSection"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RateLabel" type="Label" parent="ScrollContainer/RootVBox/PressSection/PressSectionVBox"]
+layout_mode = 2
+text = "Rate: — moonpearls/s"
+theme_override_font_sizes/font_size = 13
+alignment = 1
+
+[node name="MealsLabel" type="Label" parent="ScrollContainer/RootVBox/PressSection/PressSectionVBox"]
+layout_mode = 2
+text = "Meals today: 0  |  Costs 100✨ per moonpearl"
+theme_override_font_sizes/font_size = 12
+alignment = 1
+
+[node name="GenProgressBar" type="ProgressBar" parent="ScrollContainer/RootVBox/PressSection/PressSectionVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 12)
+max_value = 100.0
+value = 0.0
+show_percentage = false
+
+[node name="PressLabel" type="Label" parent="ScrollContainer/RootVBox/PressSection/PressSectionVBox"]
+layout_mode = 2
+text = "HOLD to use Bazaar service"
+theme_override_font_sizes/font_size = 12
+alignment = 1
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="PressButton" type="Button" parent="ScrollContainer/RootVBox/PressSection/PressSectionVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+text = "⛏  PRESS"
+theme_override_font_sizes/font_size = 18
+
+[node name="Separator2" type="HSeparator" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+
+[node name="HistorySection" type="PanelContainer" parent="ScrollContainer/RootVBox"]
+layout_mode = 2
+
+[node name="HistoryVBox" type="VBoxContainer" parent="ScrollContainer/RootVBox/HistorySection"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HistoryHeader" type="Label" parent="ScrollContainer/RootVBox/HistorySection/HistoryVBox"]
+layout_mode = 2
+text = "📊 ECONOMY STATS"
+theme_override_font_sizes/font_size = 14
+
+[node name="TotalPressedLabel" type="Label" parent="ScrollContainer/RootVBox/HistorySection/HistoryVBox"]
+layout_mode = 2
+text = "Total moonpearls serviced: 0"
+theme_override_font_sizes/font_size = 12
+
+[node name="TotalCoinsLabel" type="Label" parent="ScrollContainer/RootVBox/HistorySection/HistoryVBox"]
+layout_mode = 2
+text = "All-time moonpearls obtained: 0"
+theme_override_font_sizes/font_size = 12

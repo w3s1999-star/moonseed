@@ -1,0 +1,9 @@
+Moonseed Theme Colors
+
+Primary Colors:
+
+Deep Violet      #2A1E3F   // Base background, void space, main canvas
+Mid Violet       #3A2F5C   // Panels, surfaces, secondary backgrounds
+Cerulean Blue    #3DA9FC   // Interactive highlights, hover states
+Turquoise/Teal   #5EEAD4   // Energy, magical effects, active states
+Soft Gold        #F6C177   // Rewards, currency, important highlights, other theming roles

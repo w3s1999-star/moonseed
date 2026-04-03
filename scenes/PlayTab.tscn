@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://cbe3nabs8mx1l"]
+
+[ext_resource type="Script" uid="uid://qegta56amqna" path="res://scripts/PlayTab.gd" id="1_playtab"]
+[ext_resource type="Script" uid="uid://ucnwb5vshqqg" path="res://scripts/DiceTableArea.gd" id="2_dicetable"]
+[ext_resource type="Texture2D" uid="uid://rw7m84reis2e" path="res://assets/ui/placeholders/icon_stardust.png" id="3_stardust"]
+[ext_resource type="Texture2D" uid="uid://b53x1gckhnlss" path="res://assets/ui/table/dice_side_panel_left.png" id="4_left_panel"]
+[ext_resource type="Texture2D" uid="uid://d6gegmyjg2wb" path="res://assets/ui/table/dice_side_panel_right.png" id="5_right_panel"]
+[ext_resource type="Script" uid="uid://byvs67fknaovy" path="res://scripts/ui/side_panel_bg.gd" id="6_sidepanel"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_left"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("4_left_panel")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_right"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("5_right_panel")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="PlayTab" type="Control" unique_id=321978096]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_playtab")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1481373961]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="NavBar" type="HBoxContainer" parent="VBoxContainer" unique_id=151734749]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnPrev" type="Button" parent="VBoxContainer/NavBar" unique_id=1481127268]
+layout_mode = 2
+text = "◀"
+
+[node name="NavLabel" type="Label" parent="VBoxContainer/NavBar" unique_id=444223897]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Loading..."
+
+[node name="BtnToday" type="Button" parent="VBoxContainer/NavBar" unique_id=1669485769]
+layout_mode = 2
+text = "TODAY"
+
+[node name="BtnNext" type="Button" parent="VBoxContainer/NavBar" unique_id=916971205]
+layout_mode = 2
+text = "▶"
+
+[node name="ScoreBanner" type="PanelContainer" parent="VBoxContainer" unique_id=1841101339]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="ScoreHBox" type="Control" parent="VBoxContainer/ScoreBanner" unique_id=619801779]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ChipsLabel" type="Label" parent="VBoxContainer/ScoreBanner/ScoreHBox" unique_id=1083734865]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = -8.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+text = "✨ MOONDROPS: 0"
+vertical_alignment = 1
+clip_text = true
+
+[node name="MultLabel" type="Label" parent="VBoxContainer/ScoreBanner/ScoreHBox" unique_id=1225111987]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = -8.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+text = "🔥 STRENGTH: x1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="ScoreRow" type="HBoxContainer" parent="VBoxContainer/ScoreBanner/ScoreHBox" unique_id=63602108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = -8.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="MoonpearlIcon" type="TextureRect" parent="VBoxContainer/ScoreBanner/ScoreHBox/ScoreRow" unique_id=1837660140]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("3_stardust")
+stretch_mode = 5
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer/ScoreBanner/ScoreHBox/ScoreRow" unique_id=209103060]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "FINAL MOONPEARLS: 0"
+
+[node name="Columns" type="HBoxContainer" parent="VBoxContainer" unique_id=465403278]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="LeftPanel" type="PanelContainer" parent="VBoxContainer/Columns" unique_id=382393287]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_left")
+script = ExtResource("6_sidepanel")
+default_tex_path = "res://assets/ui/table/dice_side_panel_left.png"
+db_key = "dice_table_left_tex"
+
+[node name="LeftVBox" type="VBoxContainer" parent="VBoxContainer/Columns/LeftPanel" unique_id=271872205]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="TasksHeader" type="Label" parent="VBoxContainer/Columns/LeftPanel/LeftVBox" unique_id=530908277]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "── DICE BOXES ──"
+horizontal_alignment = 1
+
+[node name="TasksScroll" type="ScrollContainer" parent="VBoxContainer/Columns/LeftPanel/LeftVBox" unique_id=1477249669]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TasksContainer" type="VBoxContainer" parent="VBoxContainer/Columns/LeftPanel/LeftVBox/TasksScroll" unique_id=598335898]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="TaskActions" type="HBoxContainer" parent="VBoxContainer/Columns/LeftPanel/LeftVBox" unique_id=440464353]
+layout_mode = 2
+
+[node name="RollAllBtn" type="Button" parent="VBoxContainer/Columns/LeftPanel/LeftVBox/TaskActions" unique_id=64155621]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎲 ROLL ALL"
+
+[node name="CenterVBox" type="VBoxContainer" parent="VBoxContainer/Columns" unique_id=2109119687]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.46
+theme_override_constants/separation = 4
+
+[node name="DiceTable" type="Control" parent="VBoxContainer/Columns/CenterVBox" unique_id=1617047796]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_dicetable")
+
+
+[node name="RightPanel" type="PanelContainer" parent="VBoxContainer/Columns" unique_id=757011129]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_right")
+script = ExtResource("6_sidepanel")
+default_tex_path = "res://assets/ui/table/dice_side_panel_right.png"
+db_key = "dice_table_right_tex"
+
+[node name="RightVBox" type="VBoxContainer" parent="VBoxContainer/Columns/RightPanel" unique_id=1625820401]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="CurioCanistersHeader" type="Label" parent="VBoxContainer/Columns/RightPanel/RightVBox" unique_id=82045034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "── CURIO CANISTERS ──"
+horizontal_alignment = 1
+
+[node name="CurioCanistersScroll" type="ScrollContainer" parent="VBoxContainer/Columns/RightPanel/RightVBox" unique_id=376892689]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CurioCanistersContainer" type="VBoxContainer" parent="VBoxContainer/Columns/RightPanel/RightVBox/CurioCanistersScroll" unique_id=516179966]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1

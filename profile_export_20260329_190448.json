@@ -1,0 +1,143 @@
+{
+	"metadata": {
+		"export_date": "2026-03-29 19:05:32",
+		"export_format_version": 1,
+		"game_version": "0.8.0",
+		"profile_name": "Aubrey"
+	},
+	"profile_data": {
+		"achievements": {
+
+		},
+		"contracts": [],
+		"curio_canisters": [
+			{
+				"archived": false,
+				"card_color": "white",
+				"emoji": "✦",
+				"id": 1,
+				"image_path": "default.png",
+				"mult": 0.75,
+				"profile": "Aubrey",
+				"rarity": "common",
+				"studio_room": 11,
+				"title": "Cook Fancy Dinner"
+			},
+			{
+				"archived": false,
+				"card_color": "white",
+				"emoji": "✦",
+				"id": 2,
+				"image_path": "default.png",
+				"mult": 0.5,
+				"profile": "Aubrey",
+				"rarity": "common",
+				"studio_room": 12,
+				"title": "Laundry :3"
+			},
+			{
+				"archived": false,
+				"card_color": "white",
+				"emoji": "✦",
+				"id": 3,
+				"image_path": "default.png",
+				"mult": 1.25,
+				"profile": "Aubrey",
+				"rarity": "common",
+				"studio_room": 13,
+				"title": "Vaccuum/Sweep House"
+			}
+		],
+		"daily_stats": [],
+		"decorations": [],
+		"dice_inventory": {
+
+		},
+		"economy": {
+			"last_meal_date": "",
+			"machine_running": false,
+			"meals_today": 0,
+			"moonpearls": 0,
+			"moonpearls_pressed": 0,
+			"water_meter": 0.0
+		},
+		"garden": [],
+		"ingredients": {
+
+		},
+		"inventory": {
+
+		},
+		"settings": {
+			"debug_mode": true,
+			"fps_limit": null,
+			"fullscreen": null,
+			"fxaa": null,
+			"moon_phase_popup_enabled": null,
+			"msaa": null,
+			"mute_all": null,
+			"render_scale_3d": null,
+			"text_size_delta": null,
+			"timezone": null,
+			"ui_scale": null,
+			"volume_master": null,
+			"volume_sfx": null,
+			"vsync": null,
+			"window_mode": null,
+			"window_size": null
+		},
+		"shop_owned": [],
+		"sweets": {
+
+		},
+		"tasks": [
+			{
+				"archived": false,
+				"base_points": 5.0,
+				"card_color": "white",
+				"consumables": [],
+				"die_sides": 6.0,
+				"difficulty": 1.0,
+				"id": 1.0,
+				"is_default": true,
+				"profile": "Aubrey",
+				"rituals": [],
+				"sticker_slots": [],
+				"studio_room": 1.0,
+				"task": "Drink Water"
+			},
+			{
+				"archived": false,
+				"base_points": 5.0,
+				"card_color": "white",
+				"consumables": [],
+				"die_sides": 6.0,
+				"difficulty": 1.0,
+				"id": 9.0,
+				"is_default": true,
+				"profile": "Aubrey",
+				"rituals": [],
+				"sticker_slots": [],
+				"studio_room": 9.0,
+				"task": "Eat Food"
+			},
+			{
+				"archived": false,
+				"base_points": 5,
+				"card_color": "white",
+				"consumables": [],
+				"die_sides": 6,
+				"difficulty": 5,
+				"id": 10,
+				"profile": "Aubrey",
+				"rituals": [],
+				"sticker_slots": [],
+				"studio_room": 10,
+				"task": "Yoga @ 8:30p"
+			}
+		],
+		"upgrade_levels": {
+
+		}
+	}
+}

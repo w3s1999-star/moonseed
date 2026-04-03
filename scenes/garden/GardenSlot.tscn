@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmf578f6k79n9"]
+
+[ext_resource type="Script" path="res://scripts/garden/GardenSlot.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dkn4v584w3c8q" path="res://assets/ui/icons/lock.png" id="2"]
+
+[sub_resource type="BoxMesh" id="box_mesh"]
+size = Vector3(1.8, 0.3, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="wireframe_material"]
+albedo_color = Color("#6b4a28")
+roughness = 0.85
+wireframe = true
+transparency = 1
+alpha_cutoff = 0.5
+emission = Color("#8b5a28")
+emission_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="solid_base_material"]
+albedo_color = Color("#5a3e1e")
+roughness = 0.9
+transparency = 1
+alpha = 0.7
+
+[sub_resource type="SphereMesh" id="water_bubble_mesh"]
+radius = 0.15
+radial_segments = 8
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="wireframe_water_material"]
+shading_mode = 2
+wireframe = true
+albedo_color = Color("#88ccff")
+emission = Color("#aaddff")
+emission_energy = 1.5
+
+[node name="GardenSlot" type="Node3D"]
+script = ExtResource("1")
+render_priority = 10
+
+[node name="ContainerBase" type="MeshInstance3D" parent="."]
+mesh = SubResource("box_mesh")
+material_override = SubResource("solid_base_material")
+position = Vector3(0, 0.15, 0)
+cast_shadow = 2
+render_priority = 10
+
+[node name="ContainerWireframe" type="MeshInstance3D" parent="."]
+mesh = SubResource("box_mesh")
+material_override = SubResource("wireframe_material")
+position = Vector3(0, 0.15, 0)
+cast_shadow = 0
+render_priority = 11
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = BoxShape3D.new()
+shape.size = Vector3(1.9, 0.4, 1.7)
+position = Vector3(0, 0.15, 0)
+
+[node name="PlantAnchor" type="Node3D" parent="."]
+position = Vector3(0, 0.35, 0)
+
+[node name="LockIcon" type="Sprite3D" parent="."]
+position = Vector3(0, 0.7, 0)
+texture = ExtResource("2")
+pixel_size = 0.01
+modulate = Color(1, 1, 1, 0.7)
+billboard = Sprite3D.BILLBOARD_ENABLED
+cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+render_priority = 15
+
+[node name="WaterIndicator" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9, 0)
+mesh = SubResource("water_bubble_mesh")
+material_override = SubResource("wireframe_water_material")
+billboard = BaseMaterial3D.BILLBOARD_ENABLED
+visible = false
+cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+render_priority = 15
+
+[node name="WaterSplashParticles" type="GpuParticles3D" parent="."]
+position = Vector3(0, 0.3, 0)
+emitting = false
+amount = 24
+lifetime = 0.75
+scale = 3.0
+local_coords = true
+billboard = BaseMaterial3D.BILLBOARD_ENABLED
+render_priority = 12
+
+mesh = QuadMesh.new()
+material_override = StandardMaterial3D.new()
+material_override.albedo_color = Color("#88ccff")
+material_override.transparency = 1
+
+process_material = ParticlesMaterial.new()
+process_material.direction = Vector3(0, 1, 0)
+process_material.spread = 1.0
+process_material.initial_velocity = 4.0
+process_material.velocity_random = 0.5
+process_material.gravity = Vector3(0, -12, 0)
+process_material.scale = 0.15
+process_material.scale_random = 0.4
+process_material.color = Color("#88ccff", 0.8)
+process_material.color_ramp = GradientTexture1D.new()
+process_material.color_ramp.gradient = Gradient.new()
+process_material.color_ramp.gradient.colors = PackedColorArray([Color("#88ccff", 1.0), Color("#aaddff", 0.0)])

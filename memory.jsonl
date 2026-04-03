@@ -1,0 +1,3 @@
+{"type": "entity", "name": "test_user", "entityType": "person", "observations": ["Testing the memory server", "Loves programming"]}
+{"type": "entity", "name": "Moonseed_Project", "entityType": "project", "observations": ["A habit tracking game", "Built with Godot"]}
+{"type": "entity", "name": "persistent_test", "entityType": "test", "observations": ["This should be saved to file"]}

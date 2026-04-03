@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bazaar_dice_carver_screen"]
+
+[ext_resource type="PackedScene" path="res://scenes/bazaar/ShopScreenBase.tscn" id="1_shop_screen_base"]
+[ext_resource type="Script" path="res://scripts/bazaar/shops/dice_carver_screen.gd" id="2_dice_carver"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ModernShopLayout.tscn" id="3_modern_layout"]
+
+[node name="DiceCarverScreen" instance=ExtResource("1_shop_screen_base")]
+script = ExtResource("2_dice_carver")
+shop_title = "Dice Carver"
+merchant_name = "Crystal Beetle"
+dialogue_text = "A clean edge makes a kinder roll."
+
+[node name="ModernShopLayout" parent="." instance=ExtResource("3_modern_layout")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+

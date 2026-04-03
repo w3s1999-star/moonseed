@@ -1,0 +1,4 @@
+# White Pixel Texture for Dice Explosion Particles
+# This should be a 1x1 white PNG image
+# Create this image manually or use any image editor to create a 1x1 white pixel
+# Save as: assets/textures/white_pixel.png

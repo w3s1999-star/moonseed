@@ -1,0 +1,12 @@
+{
+    "godotTools.editorPath.godot4": "/usr/share/applications/org.godotengine.Godot.desktop",
+    "chat.tools.terminal.autoApprove": {
+        "godot": true,
+        "/^cd /home/aubrey/Documents/Moonseed\\\\ Indev\\\\ 0\\.7c-\\\\ Confections && python - <<'PY'\nfrom pathlib import Path\npath = Path\\('scripts/bazaar/dice_carver_screen\\.gd'\\)\nlines = path\\.read_text\\(\\)\\.splitlines\\(\\)\nfor i, l in enumerate\\(lines\\):\n    if i\\+1 == 302:\n        lines\\[i\\] = '\\\\tvar dice_count := 0'\n    if i\\+1 == 303:\n        lines\\[i\\] = '\\\\tfor dice_type in GameData\\.DICE_CARVER_SHOP_ITEMS\\.keys\\(\\):'\npath\\.write_text\\('\\\\n'\\.join\\(lines\\) \\+ '\\\\n'\\)\nprint\\('updated lines 302-303 indentation'\\)\nPY$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    },
+    "[markdown]": {
+    }
+}

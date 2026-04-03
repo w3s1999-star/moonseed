@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunar_bazaar_env01"]
+
+[ext_resource type="Script" path="res://scripts/bazaar/BazaarVendor.gd" id="1_bazaarvendor"]
+
+[node name="LunarBazaar" type="Node2D"]
+
+[node name="BazaarBackground" type="Node2D" parent="."]
+
+[node name="PearlExchange" type="Node2D" parent="."]
+position = Vector2(-400, 0)
+script = ExtResource("1_bazaarvendor")
+vendor_id = "pearl_exchange"
+
+[node name="DiceCarver" type="Node2D" parent="."]
+position = Vector2(-200, 0)
+script = ExtResource("1_bazaarvendor")
+vendor_id = "dice_carver"
+
+[node name="CurioDealer" type="Node2D" parent="."]
+position = Vector2(0, 0)
+script = ExtResource("1_bazaarvendor")
+vendor_id = "curio_dealer"
+
+[node name="SelenicExchange" type="Node2D" parent="."]
+position = Vector2(200, 0)
+script = ExtResource("1_bazaarvendor")
+vendor_id = "selenic_exchange"
+
+[node name="SweetmakerStall" type="Node2D" parent="."]
+position = Vector2(400, 0)
+script = ExtResource("1_bazaarvendor")
+vendor_id = "sweetmaker_stall"
+
+[node name="BazaarNPCSpawner" type="Node2D" parent="."]
+
+[node name="AmbientParticles" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]

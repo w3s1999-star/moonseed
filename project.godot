@@ -1,0 +1,61 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Moonseed (Stable Build Release)"
+config/version="0.7.0M"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/stretch_mode=5
+boot_splash/use_filter=false
+config/icon="uid://chg4t3amyfgr1"
+
+[autoload]
+
+SignalBus="*res://autoloads/SignalBus.gd"
+GameData="*res://autoloads/GameData.gd"
+Database="*res://autoloads/Database.gd"
+GardenSeedManager="*res://autoloads/GardenSeedManager.gd"
+ButtonFeedback="*res://autoloads/ButtonFeedback.gd"
+DiceSound="*res://autoloads/DiceSound.gd"
+AudioManager="*res://autoloads/AudioManager.gd"
+FXBus="*res://autoloads/FXBus.gd"
+Juice="*res://autoloads/Juice.gd"
+ActiveBuffs="*res://autoloads/ActiveBuffs.gd"
+IngredientData="*res://autoloads/IngredientData.gd"
+ArtReg="*res://autoloads/PlaceholderArtRegistry.gd"
+PlaceholderGen="*res://autoloads/PlaceholderGeneratorAutoload.gd"
+ContractRewardOverlay="*res://autoloads/ContractRewardOverlay.gd"
+StudioRoomManager="*res://autoloads/StudioRoomManager.gd"
+CursorManager="*res://autoloads/CursorManager.gd"
+SfxCache="*res://autoloads/SfxCache.gd"
+CurioManager="*res://scripts/curio/curio_manager.gd"
+ChocolateData="*res://scripts/data/ChocolateData.gd"
+ThemeHelper="*res://autoloads/ThemeHelper.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
+textures/lossless_compression/force_png=true

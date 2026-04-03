@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c1g4n6l3r5q2k"]
+
+[ext_resource type="Script" path="res://scripts/ui/task_dice_box.gd" id="1_10yrn"]
+
+[node name="TaskDiceBox" type="Node3D"]
+script = ExtResource("1_10yrn")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="VisualRoot"]
+
+[node name="BodyOutlineMesh" type="MeshInstance3D" parent="VisualRoot"]
+scale = Vector3(1.05, 1.04, 1.05)
+
+[node name="LidMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 0.32, 0)
+
+[node name="LidOutlineMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 0.32, 0)
+scale = Vector3(1.05, 1.04, 1.05)
+
+[node name="LipMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 0.16, 0)
+
+[node name="HardwarePlateMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, -0.02, 0.76)
+
+[node name="HardwareClaspMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, -0.14, 0.81)
+
+[node name="KnobMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 0.58, 0)
+
+[node name="ShadowMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, -0.28, 0)
+
+[node name="TaskName" type="Label3D" parent="VisualRoot"]
+position = Vector3(0, 0.12, 0.42)
+font_size = 28
+modulate = Color(0.16, 0.11, 0.07, 1)
+outline_size = 6
+outline_modulate = Color(0.98, 0.94, 0.88, 0.95)
+alignment = 1
+text = "Task"
+
+[node name="Difficulty" type="Label3D" parent="VisualRoot"]
+position = Vector3(0, -0.2, 0.48)
+font_size = 20
+modulate = Color(0.28, 0.18, 0.09, 1)
+outline_size = 5
+outline_modulate = Color(0.98, 0.94, 0.88, 0.92)
+alignment = 1
+text = "⬟"
+
+[node name="DieTypeLabel" type="Label3D" parent="VisualRoot"]
+position = Vector3(0.0, -0.3, 0.52)
+font_size = 18
+modulate = Color(0.22, 0.14, 0.08, 1)
+outline_size = 4
+outline_modulate = Color(1, 0.98, 0.92, 0.88)
+alignment = 1
+text = "d6"
+
+[node name="DieTypeIcon" type="Sprite3D" parent="VisualRoot"]
+position = Vector3(0.0, -0.38, 0.58)
+pixel_size = 0.0045
+modulate = Color(1, 1, 1, 0.95)
+billboard = 1
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

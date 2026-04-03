@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b1ma57hf5wb"]
+
+[ext_resource type="Script" uid="uid://bnmph1yjcejrc" path="res://scripts/tools/btn_phase6_generator.gd" id="1_pgukt"]
+[ext_resource type="Script" uid="uid://24mx7j187nw0" path="res://scripts/tools/BtnPhase6Validator.gd" id="2_bxt15"]
+
+[node name="btn_phase_generator" type="Node" unique_id=190776272]
+script = ExtResource("1_pgukt")
+
+[node name="BtnPhaseValidator" type="Control" parent="." unique_id=997403624]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_bxt15")

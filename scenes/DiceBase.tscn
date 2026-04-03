@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/dice_base.gd" id="1_dicebase"]
+[ext_resource type="SpriteFrames" path="res://assets/textures/dice/symmetrical_impact_006_large_yellow/impact_frames.tres" id="2_impact"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(40, 40)
+
+[node name="DiceBase" type="RigidBody2D"]
+script = ExtResource("1_dicebase")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="ImpactFX" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 0)
+offset = Vector2(-80, -80)
+sprite_frames = ExtResource("2_impact")
+animation = &"impact"
+playing = false
+visible = false
+
+[node name="FaceSprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="FaceLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+alignment = 1
+vertical_alignment = 1
+text = "?"
+theme_override_font_sizes/font_size = 18

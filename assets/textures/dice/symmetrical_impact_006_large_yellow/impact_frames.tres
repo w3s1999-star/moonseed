@@ -1,0 +1,43 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/dice/symmetrical_impact_006_large_yellow/symmetrical_impact_006_large_yellow.png" id="1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(0, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(160, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(320, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(480, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(640, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(800, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(960, 0, 160, 160)
+}, {
+"duration": 1.0,
+"texture": ExtResource("1"),
+"texture_region": Rect2(1120, 0, 160, 160)
+}],
+"loop": false,
+"name": &"impact",
+"speed": 6.666666666666667
+}]
